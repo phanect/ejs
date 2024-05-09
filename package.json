@@ -48,6 +48,7 @@
   },
   "scripts": {
     "build": "jake build",
-    "test": "jake test"
+    "test": "jake test",
+    "lint": "eslint"
   }
 }
