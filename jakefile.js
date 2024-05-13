@@ -7,13 +7,6 @@ let exec = function (cmd) {
 
 /* global jake, task, desc, publishTask */
 
-const BUILT_EJS_FILES = [
-  'ejs.js',
-  'ejs.min.js',
-  'lib/esm/ejs.js',
-  'lib/cjs/ejs.js',
-];
-
 // Hook into some of the publish lifecycle events
 jake.on('finished', function (ev) {
 
