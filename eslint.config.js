@@ -1,6 +1,6 @@
 const stylisticJs = require('@stylistic/eslint-plugin-js');
 
-export default [
+module.exports = [
   {
     files: [ '*.js', '*.mjs', '*.cjs' ],
     languageOptions: {
