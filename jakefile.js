@@ -7,6 +7,9 @@ let exec = function (cmd) {
 
 /* global jake, task, desc, publishTask */
 
+const buildPath = path.join(__dirname, "./ejs.js");
+const minifiedBuildPath = path.join(__dirname, "./ejs.min.js");
+
 // Hook into some of the publish lifecycle events
 jake.on('finished', function (ev) {
 
@@ -47,8 +50,8 @@ task('compile', function () {
 
 desc('Cleans browerified/minified files and package files');
 task('clean', ['clobber'], function () {
-  jake.rmRf('./ejs.js');
-  jake.rmRf('./ejs.min.js');
+  jake.rmRf(buildPath);
+  jake.rmRf(minifiedBuildPath);
   jake.rmRf('./lib/cjs');
   console.log('Cleaned up compiled files.');
 });
@@ -57,14 +60,14 @@ task('browserify', function () {
   const currentDir = process.cwd();
   process.chdir('./lib/cjs');
   let epath = path.join('../../node_modules/browserify/bin/cmd.js');
-  exec(epath+' --standalone ejs ejs.js > ../../ejs.js');
+  exec(`${epath} --standalone ejs ejs.js > ${buildPath}`);
   process.chdir(currentDir);
   console.log('Browserification completed.');
 });
 
 task('minify', function () {
   let epath = path.join('./node_modules/uglify-js/bin/uglifyjs');
-  exec(epath+' ./lib/cjs/ejs.js > ejs.min.js');
+  exec(`${epath} ./lib/cjs/ejs.js > ${minifiedBuildPath}`);
   console.log('Minification completed.');
 });
 
