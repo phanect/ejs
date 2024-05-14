@@ -1,8 +1,10 @@
+const { join } = require('node:path');
 const stylisticJs = require('@stylistic/eslint-plugin-js');
 
 module.exports = [
   {
     files: [ '*.js', '*.mjs', '*.cjs' ],
+    ignores: [ './ejs.js', '*.min.js' ],
     languageOptions: {
       globals: {
         suite: 'readonly',
@@ -48,12 +50,13 @@ module.exports = [
   },
   {
     files: [ '*.js', '*.cjs' ],
+    ignores: [ './ejs.js', '*.min.js' ],
     languageOptions: {
       sourceType: 'commonjs',
     },
   },
   {
-    files: [ '*.mjs' ],
+    files: [ '*.mjs', './lib/esm/**/*.js' ],
     languageOptions: {
       sourceType: 'module',
     },

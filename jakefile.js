@@ -7,8 +7,9 @@ let exec = function (cmd) {
 
 /* global jake, task, desc, publishTask */
 
-const buildPath = path.join(__dirname, "./ejs.js");
-const minifiedBuildPath = path.join(__dirname, "./ejs.min.js");
+const distDir = path.join(__dirname, "dist");
+const buildPath = path.join(distDir, "ejs.js");
+const minifiedBuildPath = path.join(distDir, "ejs.min.js");
 
 // Hook into some of the publish lifecycle events
 jake.on('finished', function (ev) {
@@ -109,8 +110,7 @@ publishTask('ejs', ['build'], function () {
     'README.md',
     'LICENSE',
     'package.json',
-    'ejs.js',
-    'ejs.min.js',
+    'dist/**',
     'lib/**',
     'bin/**',
     'usage.txt'
